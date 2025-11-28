@@ -1,7 +1,9 @@
+import Logo from "../components/Logo";
+
 const MainPage = () =>{
     return(
-    <div>
-        <p>Main Page</p>
+    <div className="p-16">
+        <Logo />
     </div>
     );
 }

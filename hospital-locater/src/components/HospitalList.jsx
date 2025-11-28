@@ -72,7 +72,6 @@ export default function HospitalList() {
 
   return (
     <div className="min-h-screen p-5 bg-[#D1FAFF]">
-      <BackButton />
 
       <h1 className="text-2xl font-bold mb-4 text-gray-800">Nearest Hospitals</h1>
 

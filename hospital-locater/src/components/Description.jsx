@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-// 3D Interactive Card Component with mouse tracking
+
 const InteractiveCard3D = ({ isVisible }) => {
     const [cardTransform, setCardTransform] = useState({ rotateX: 0, rotateY: 0 });
     const [glowPosition, setGlowPosition] = useState({ x: 50, y: 50 });
@@ -102,10 +103,15 @@ const InteractiveCard3D = ({ isVisible }) => {
 
 const Description = () => {
     const [isVisible, setIsVisible] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setIsVisible(true);
     }, []);
+
+    const handleNavigateToHospitals = () => {
+        navigate('/hospitallist');
+    };
 
     const features = [
         {
@@ -155,8 +161,8 @@ const Description = () => {
                     <div
                         key={index}
                         className={`group relative transition-all duration-1000 transform ${isVisible
-                                ? 'opacity-100 translate-y-0'
-                                : 'opacity-0 translate-y-10'
+                            ? 'opacity-100 translate-y-0'
+                            : 'opacity-0 translate-y-10'
                             }`}
                         style={{ transitionDelay: `${(index + 3) * 100}ms` }}
                     >
@@ -228,7 +234,10 @@ const Description = () => {
             >
                 <div className="relative inline-block">
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur-lg opacity-50"></div>
-                    <div className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white px-10 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer">
+                    <div
+                        onClick={handleNavigateToHospitals}
+                        className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white px-10 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer"
+                    >
                         Start Finding Healthcare Now
                     </div>
                 </div>

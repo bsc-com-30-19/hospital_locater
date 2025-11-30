@@ -1,5 +1,105 @@
 import { useState, useEffect } from 'react';
 
+// 3D Interactive Card Component with mouse tracking
+const InteractiveCard3D = ({ isVisible }) => {
+    const [cardTransform, setCardTransform] = useState({ rotateX: 0, rotateY: 0 });
+    const [glowPosition, setGlowPosition] = useState({ x: 50, y: 50 });
+
+    const handleMouseMove = (e) => {
+        const card = e.currentTarget;
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateY = ((x - centerX) / centerX) * 15;
+        const rotateX = ((centerY - y) / centerY) * 15;
+
+        setCardTransform({ rotateX, rotateY });
+        setGlowPosition({ x: (x / rect.width) * 100, y: (y / rect.height) * 100 });
+    };
+
+    const handleMouseLeave = () => {
+        setCardTransform({ rotateX: 0, rotateY: 0 });
+        setGlowPosition({ x: 50, y: 50 });
+    };
+
+    return (
+        <div
+            className={`relative mb-16 perspective-1000 transition-all duration-1000 delay-200 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                }`}
+        >
+            {/* Animated gradient background blur */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-3xl blur-xl opacity-20 animate-pulse"></div>
+
+            {/* 3D Card Container */}
+            <div
+                className="relative preserve-3d transition-all duration-300 ease-out"
+                style={{
+                    transform: `perspective(1000px) rotateX(${cardTransform.rotateX}deg) rotateY(${cardTransform.rotateY}deg)`,
+                }}
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+            >
+                {/* Animated Background Layer 1 - Moving Gradient */}
+                <div className="absolute inset-0 rounded-3xl overflow-hidden">
+                    <div className="absolute inset-0 opacity-30">
+                        <div className="absolute -inset-full animate-spin-slow bg-gradient-conic from-blue-500 via-purple-500 to-pink-500"></div>
+                    </div>
+                </div>
+
+                {/* Animated Background Layer 2 - Floating Shapes */}
+                <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
+                    {/* Floating medical icons/shapes */}
+                    <div className="absolute top-10 left-10 w-20 h-20 bg-blue-400/20 rounded-full animate-float blur-xl"></div>
+                    <div className="absolute top-32 right-20 w-16 h-16 bg-purple-400/20 rounded-full animate-float-delayed blur-xl"></div>
+                    <div className="absolute bottom-20 left-32 w-24 h-24 bg-pink-400/20 rounded-full animate-float-slow blur-xl"></div>
+                    <div className="absolute bottom-32 right-10 w-12 h-12 bg-blue-300/20 rounded-full animate-float blur-xl"></div>
+                </div>
+
+                {/* Mouse-tracking glow effect */}
+                <div
+                    className="absolute inset-0 rounded-3xl opacity-0 hover:opacity-100 transition-opacity duration-500"
+                    style={{
+                        background: `radial-gradient(circle at ${glowPosition.x}% ${glowPosition.y}%, rgba(147, 51, 234, 0.3), transparent 50%)`,
+                    }}
+                ></div>
+
+                {/* Main Card Content */}
+                <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-3xl p-8 md:p-12 shadow-2xl border border-white/20 overflow-hidden">
+                    {/* Gradient overlay animation */}
+                    <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 animate-shimmer"></div>
+
+                    {/* Content */}
+                    <div className="relative z-10">
+                        <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white flex items-center gap-3">
+                            <span className="text-4xl animate-pulse">💡</span>
+                            What We Offer
+                        </h2>
+                        <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+                            Hospital Locater is a powerful web application designed to help you quickly and easily
+                            find the nearest hospitals, clinics, and health facilities in your area. Whether you're
+                            facing a medical emergency or simply need to find a healthcare provider, our app provides
+                            you with accurate, up-to-date information at your fingertips.
+                        </p>
+                        <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                            With an intuitive interface and advanced location services, we make healthcare access
+                            simple and stress-free. Our mission is to ensure that quality medical care is never more
+                            than a few clicks away.
+                        </p>
+                    </div>
+
+                    {/* Decorative corner elements */}
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-400/10 to-transparent rounded-bl-full"></div>
+                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-purple-400/10 to-transparent rounded-tr-full"></div>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 const Description = () => {
     const [isVisible, setIsVisible] = useState(false);
 
@@ -37,7 +137,7 @@ const Description = () => {
                 className={`text-center mb-16 transition-all duration-1000 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                     }`}
             >
-                <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+                <h1 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent animate-gradient">
                     Hospital Locater
                 </h1>
                 <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
@@ -46,29 +146,8 @@ const Description = () => {
                 </p>
             </div>
 
-            {/* Main Description Card */}
-            <div
-                className={`relative mb-16 transition-all duration-1000 delay-200 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                    }`}
-            >
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-3xl blur-xl opacity-20"></div>
-                <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-3xl p-8 md:p-12 shadow-2xl border border-white/20">
-                    <h2 className="text-3xl font-bold mb-6 text-gray-800 dark:text-white">
-                        What We Offer
-                    </h2>
-                    <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-                        Hospital Locater is a powerful web application designed to help you quickly and easily
-                        find the nearest hospitals, clinics, and health facilities in your area. Whether you're
-                        facing a medical emergency or simply need to find a healthcare provider, our app provides
-                        you with accurate, up-to-date information at your fingertips.
-                    </p>
-                    <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                        With an intuitive interface and advanced location services, we make healthcare access
-                        simple and stress-free. Our mission is to ensure that quality medical care is never more
-                        than a few clicks away.
-                    </p>
-                </div>
-            </div>
+            {/* 3D Interactive Main Description Card */}
+            <InteractiveCard3D isVisible={isVisible} />
 
             {/* Features Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">

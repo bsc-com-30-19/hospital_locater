@@ -32,7 +32,7 @@ const getHoverStyle = (hover, processing) =>
 const getDisabledStyle = (processing) =>
     processing ? { opacity: 0.78 } : {};
 
-const LocaterButton = () =>{
+const LocaterButton = ({ onButtonClick }) =>{
     const [processing, setProcessing] = useState(false);
     const [hover, setHover] = useState(false);
     const navigate = useNavigate();
@@ -49,7 +49,7 @@ const LocaterButton = () =>{
     };
     return(
             <button
-                onClick={handleIdentify}
+                onClick={onButtonClick}
                 disabled={processing}
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}

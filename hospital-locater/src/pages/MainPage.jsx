@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Logo from "../components/Logo";
+import Description from "../components/Description";
 
 /* ---------------------------------------------
    BUTTON STYLES (Modularized)
@@ -55,7 +56,7 @@ const MainPage = () => {
     return (
         <div className="flex flex-col items-center justify-center h-[80vh] gap-4">
            <Logo />
-
+           <Description />
             {/* BUTTON */}
             <button
                 onClick={handleIdentify}

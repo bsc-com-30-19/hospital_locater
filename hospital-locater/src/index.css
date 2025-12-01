@@ -1,6 +1,5 @@
-@import "tailwindcss";
+@import "tailwindcss/preflight";
 @tailwind utilities;
-@tailwind base;
 
 /* Custom 3D Perspective and Preserve-3D */
 .perspective-1000 {

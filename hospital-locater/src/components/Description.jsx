@@ -33,7 +33,7 @@ const InteractiveCard3D = ({ isVisible }) => {
                 }`}
         >
             {/* Animated gradient background blur */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-3xl blur-xl opacity-20 animate-pulse"></div>
+            <div className="absolute inset-0 rounded-3xl blur-xl opacity-20 animate-pulse" style={{ background: 'linear-gradient(135deg, #9BD1E5, #6A8EAE)' }}></div>
 
             {/* 3D Card Container */}
             <div
@@ -47,31 +47,31 @@ const InteractiveCard3D = ({ isVisible }) => {
                 {/* Animated Background Layer 1 - Moving Gradient */}
                 <div className="absolute inset-0 rounded-3xl overflow-hidden">
                     <div className="absolute inset-0 opacity-30">
-                        <div className="absolute -inset-full animate-spin-slow bg-gradient-conic from-blue-500 via-purple-500 to-pink-500"></div>
+                        <div className="absolute -inset-full animate-spin-slow" style={{ background: 'conic-gradient(from 0deg, #9BD1E5, #6A8EAE, #9BD1E5)' }}></div>
                     </div>
                 </div>
 
                 {/* Animated Background Layer 2 - Floating Shapes */}
                 <div className="absolute inset-0 rounded-3xl overflow-hidden pointer-events-none">
                     {/* Floating medical icons/shapes */}
-                    <div className="absolute top-10 left-10 w-20 h-20 bg-blue-400/20 rounded-full animate-float blur-xl"></div>
-                    <div className="absolute top-32 right-20 w-16 h-16 bg-purple-400/20 rounded-full animate-float-delayed blur-xl"></div>
-                    <div className="absolute bottom-20 left-32 w-24 h-24 bg-pink-400/20 rounded-full animate-float-slow blur-xl"></div>
-                    <div className="absolute bottom-32 right-10 w-12 h-12 bg-blue-300/20 rounded-full animate-float blur-xl"></div>
+                    <div className="absolute top-10 left-10 w-20 h-20 rounded-full animate-float blur-xl" style={{ backgroundColor: 'rgba(155, 209, 229, 0.2)' }}></div>
+                    <div className="absolute top-32 right-20 w-16 h-16 rounded-full animate-float-delayed blur-xl" style={{ backgroundColor: 'rgba(106, 142, 174, 0.2)' }}></div>
+                    <div className="absolute bottom-20 left-32 w-24 h-24 rounded-full animate-float-slow blur-xl" style={{ backgroundColor: 'rgba(155, 209, 229, 0.2)' }}></div>
+                    <div className="absolute bottom-32 right-10 w-12 h-12 rounded-full animate-float blur-xl" style={{ backgroundColor: 'rgba(106, 142, 174, 0.2)' }}></div>
                 </div>
 
                 {/* Mouse-tracking glow effect */}
                 <div
                     className="absolute inset-0 rounded-3xl opacity-0 hover:opacity-100 transition-opacity duration-500"
                     style={{
-                        background: `radial-gradient(circle at ${glowPosition.x}% ${glowPosition.y}%, rgba(147, 51, 234, 0.3), transparent 50%)`,
+                        background: `radial-gradient(circle at ${glowPosition.x}% ${glowPosition.y}%, rgba(155, 209, 229, 0.3), transparent 50%)`,
                     }}
                 ></div>
 
                 {/* Main Card Content */}
                 <div className="relative bg-white/80 dark:bg-gray-800/80 backdrop-blur-lg rounded-3xl p-8 md:p-12 shadow-2xl border border-white/20 overflow-hidden">
                     {/* Gradient overlay animation */}
-                    <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 animate-shimmer"></div>
+                    <div className="absolute top-0 left-0 w-full h-2 animate-shimmer" style={{ background: 'linear-gradient(90deg, #9BD1E5, #6A8EAE)' }}></div>
 
                     {/* Content */}
                     <div className="relative z-10">
@@ -93,8 +93,8 @@ const InteractiveCard3D = ({ isVisible }) => {
                     </div>
 
                     {/* Decorative corner elements */}
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-400/10 to-transparent rounded-bl-full"></div>
-                    <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-purple-400/10 to-transparent rounded-tr-full"></div>
+                    <div className="absolute top-0 right-0 w-32 h-32 rounded-bl-full" style={{ background: 'linear-gradient(to bottom right, rgba(155, 209, 229, 0.1), transparent)' }}></div>
+                    <div className="absolute bottom-0 left-0 w-32 h-32 rounded-tr-full" style={{ background: 'linear-gradient(to top right, rgba(106, 142, 174, 0.1), transparent)' }}></div>
                 </div>
             </div>
         </div>
@@ -166,7 +166,7 @@ const Description = () => {
                             }`}
                         style={{ transitionDelay: `${(index + 3) * 100}ms` }}
                     >
-                        <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-purple-600 rounded-2xl blur-lg opacity-0 group-hover:opacity-30 transition-opacity duration-300"></div>
+                        <div className="absolute inset-0 rounded-2xl blur-lg opacity-0 group-hover:opacity-30 transition-opacity duration-300" style={{ background: 'linear-gradient(135deg, #9BD1E5, #6A8EAE)' }}></div>
                         <div className="relative bg-white/70 dark:bg-gray-800/70 backdrop-blur-md rounded-2xl p-6 shadow-lg border border-white/20 hover:shadow-2xl hover:scale-105 transition-all duration-300">
                             <div className="text-5xl mb-4">{feature.icon}</div>
                             <h3 className="text-2xl font-bold mb-3 text-gray-800 dark:text-white">
@@ -185,7 +185,7 @@ const Description = () => {
                 className={`transition-all duration-1000 delay-700 transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                     }`}
             >
-                <h2 className="text-4xl font-bold mb-10 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                <h2 className="text-4xl font-bold mb-10 text-center bg-clip-text text-transparent" style={{ backgroundImage: 'linear-gradient(135deg, #9BD1E5, #6A8EAE)' }}>
                     How It Works
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -210,9 +210,9 @@ const Description = () => {
                             key={index}
                             className="relative group"
                         >
-                            <div className="absolute -inset-2 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-300"></div>
+                            <div className="absolute -inset-2 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-300" style={{ background: 'linear-gradient(135deg, #9BD1E5, #6A8EAE)' }}></div>
                             <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
-                                <div className="text-6xl font-bold text-transparent bg-gradient-to-br from-blue-400 to-purple-600 bg-clip-text mb-4">
+                                <div className="text-6xl font-bold text-transparent bg-clip-text mb-4" style={{ backgroundImage: 'linear-gradient(135deg, #9BD1E5, #6A8EAE)' }}>
                                     {item.step}
                                 </div>
                                 <h3 className="text-2xl font-bold mb-3 text-gray-800 dark:text-white">
@@ -233,12 +233,13 @@ const Description = () => {
                     }`}
             >
                 <div className="relative inline-block">
-                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full blur-lg opacity-50"></div>
+                    <div className="absolute inset-0 rounded-full blur-lg opacity-50" style={{ background: 'linear-gradient(135deg, #9BD1E5, #6A8EAE)' }}></div>
                     <div
                         onClick={handleNavigateToHospitals}
-                        className="relative bg-gradient-to-r from-blue-600 to-purple-600 text-white px-10 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer"
+                        className="relative text-white px-10 py-4 rounded-full font-semibold text-lg shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer"
+                        style={{ background: 'linear-gradient(135deg, #9BD1E5, #6A8EAE)' }}
                     >
-                        Start Finding Healthcare Now
+                        Find Nearest Health Care
                     </div>
                 </div>
             </div>

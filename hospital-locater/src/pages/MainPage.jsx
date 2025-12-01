@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Logo from "../components/Logo";
 
 /* ---------------------------------------------
    BUTTON STYLES (Modularized)
@@ -53,7 +54,7 @@ const MainPage = () => {
 
     return (
         <div className="flex flex-col items-center justify-center h-[80vh] gap-4">
-            <h1 className="text-2xl font-bold">Main Page</h1>
+           <Logo />
 
             {/* BUTTON */}
             <button
@@ -71,6 +72,7 @@ const MainPage = () => {
                 </span>
             </button>
         </div>
+
     );
 };
 

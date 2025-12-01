@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@tailwind utilities;
+@tailwind base;
 
 /* Custom 3D Perspective and Preserve-3D */
 .perspective-1000 {
@@ -97,7 +99,7 @@
 /* Conic Gradient Background */
 .bg-gradient-conic {
   background: conic-gradient(from 0deg, var(--tw-gradient-stops));
-
+}
 /* You can add global overrides below */
 html, body, #root {
 	height: 100%;

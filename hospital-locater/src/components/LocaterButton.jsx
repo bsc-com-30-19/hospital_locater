@@ -32,14 +32,14 @@ const getHoverStyle = (hover, processing) =>
 const getDisabledStyle = (processing) =>
     processing ? { opacity: 0.78 } : {};
 
-const LocaterButton = ({ onButtonClick }) =>{
+const LocaterButton = ({ onButtonClick, hospitalData }) =>{
     const [processing, setProcessing] = useState(false);
     const [hover, setHover] = useState(false);
     const navigate = useNavigate();
 
     const handleIdentify = () => {
         setProcessing(true);
-        setTimeout(() => navigate('/hospitallist'), 2200);
+        setTimeout(() => navigate('/hospitallist', {}), 2200);
     };
 
     const buttonStyle = {

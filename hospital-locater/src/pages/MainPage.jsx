@@ -2,11 +2,13 @@ import Logo from "../components/Logo";
 import Description from "../components/Description";
 import LocaterButton from "../components/LocaterButton";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const MainPage = () => {
     const [hospitals, setHospitals] = useState([]);
     const [loading, setLoading] = useState(false);
     const [userLocation, setUserLocation] = useState({ lat: null, lng: null });
+    const navigate = useNavigate();
 
     const fetchHospitals = async () => {
     setLoading(true);
@@ -25,6 +27,7 @@ const MainPage = () => {
           );
           const data = await res.json();
           setHospitals(data);
+          navigate("/hospitallist", { state: {hospitalData: hospitals, userLocationData: userLocation}})
         } catch (error) {
           console.error("Error fetching hospitals:", error);
           alert("Failed to fetch hospitals. Try again later.");

@@ -97,4 +97,8 @@
 /* Conic Gradient Background */
 .bg-gradient-conic {
   background: conic-gradient(from 0deg, var(--tw-gradient-stops));
+
+/* You can add global overrides below */
+html, body, #root {
+	height: 100%;
 }

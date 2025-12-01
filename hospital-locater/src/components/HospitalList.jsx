@@ -1,43 +1,63 @@
 import React, { useEffect, useState } from "react";
 import BackButton from "./BackButton";
-import { useNavigate } from "react-router-dom";
 
 export default function HospitalList({hospitalData, userLocation}) {
   const [hospitals, setHospitals] = useState([]);
   setHospitals(hospitalData)
   return (
-    <div className="min-h-screen p-5 bg-[#D1FAFF]">
+    <div style={{ marginTop: "20px" }}>
+      {hospitals.map((h, index) => (
+        <div
+          key={index}
+          style={{
+            padding: "15px",
+            border: "1px solid #2e2a2aff",
+            borderRadius: "8px",
+            marginBottom: "15px",
+            textAlign: "left",
+            background: "#f9f9f9",
+            boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
+          }}
+        >
+          <p style={{ fontSize: "18px", fontWeight: "bold", marginBottom: "5px" }}>{h.name}</p>
+          <p style={{ margin: "3px 0" }}>District: {h.district}</p>
+          <p style={{ margin: "3px 0" }}>Distance: {(h.distance / 1000).toFixed(2)} km</p>
 
-      <h1 className="text-2xl font-bold mb-4 text-gray-800">Nearest Hospitals</h1>
+          {/* Get Directions Button aligned right */}
+          <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "10px" }}>
+            <button
+              style={{
+                background: "#00897b",
+                color: "#fff",
+                border: "none",
+                padding: "10px 16px",
+                borderRadius: "6px",
+                cursor: "pointer",
+                fontWeight: "bold",
+                transition: "background 0.3s",
+              }}
+              onMouseOver={e => (e.target.style.background = "#00695c")}
+              onMouseOut={e => (e.target.style.background = "#00897b")}
+              onClick={() => {
+                if (!userLocation || !userLocation.lat || !userLocation.lng) {
+                  alert("User location not available yet!");
+                  return;
+                }
 
-      <div className="space-y-4">
-        {hospitals.map((h) => (
-          <div
-            key={h.id}
-            className="p-4 rounded-lg shadow cursor-pointer transition"
-            style={{ backgroundColor: "#9BD1E5" }}
-            onClick={() =>
-              navigate(`/details/${h.id}`, { state: { hospital: h } })
-            }
-            onMouseEnter={(e) =>
-              (e.currentTarget.style.backgroundColor = "#6A8EAE")
-            }
-            onMouseLeave={(e) =>
-              (e.currentTarget.style.backgroundColor = "#9BD1E5")
-            }
-          >
-            <h2 className="text-lg font-semibold text-gray-100">{h.name}</h2>
-            <p className="text-gray-100 text-sm">
-              {h.district}, {h.region}
-            </p>
-            {h.distance && (
-              <p className="text-gray-200 mt-1">
-                Distance: {h.distance} km
-              </p>
-            )}
+                if (!h.lat || !h.lng) {
+                  alert("Hospital coordinates not available!");
+                  return;
+                }
+
+                const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&origin=${userLocation.lat},${userLocation.lng}&destination=${h.lat},${h.lng}`;
+                window.open(googleMapsUrl, "_blank");
+              }}
+            >
+              Get Directions
+            </button>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 }

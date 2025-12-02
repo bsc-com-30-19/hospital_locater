@@ -2,20 +2,16 @@ import React, { useEffect, useState } from "react";
 import BackButton from "./BackButton";
 
 export default function HospitalList({hospitalData, userLocation}) {
-  const [hospitals, setHospitals] = useState([]);
-  setHospitals(hospitalData)
+ 
   return (
     <div style={{ marginTop: "20px" }}>
-      {hospitals.map((h, index) => (
+      {hospitalData.map((h, index) => (
         <div
           key={index}
+          className="p-[15px] bg-[#D1FAFF] rounded-[8px] mb-[15px] "
           style={{
-            padding: "15px",
-            border: "1px solid #2e2a2aff",
-            borderRadius: "8px",
-            marginBottom: "15px",
+            color : "#062135",
             textAlign: "left",
-            background: "#f9f9f9",
             boxShadow: "0 2px 6px rgba(0,0,0,0.08)",
           }}
         >
@@ -27,8 +23,8 @@ export default function HospitalList({hospitalData, userLocation}) {
           <div style={{ display: "flex", justifyContent: "flex-end", marginTop: "10px" }}>
             <button
               style={{
-                background: "#00897b",
-                color: "#fff",
+                background: "#9BD1E5",
+                color: "#062135",
                 border: "none",
                 padding: "10px 16px",
                 borderRadius: "6px",

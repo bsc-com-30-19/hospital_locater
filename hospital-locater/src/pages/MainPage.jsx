@@ -27,7 +27,7 @@ const MainPage = () => {
           );
           const data = await res.json();
           setHospitals(data);
-          navigate("/hospitallist", { state: {hospitalData: hospitals, userLocationData: userLocation}})
+          navigate("/hospitallist", { state: {hospitalData: data, userLocationData: {lat, lng}}})
         } catch (error) {
           console.error("Error fetching hospitals:", error);
           alert("Failed to fetch hospitals. Try again later.");
@@ -44,7 +44,7 @@ const MainPage = () => {
   };
 
     return (
-        <div className=" items-center justify-center h-[80vh] gap-4 px-[18rem]">
+        <div className="items-center justify-center h-[80vh] gap-4 px-[18rem]">
            <Logo />
            <Description />
            <LocaterButton onButtonClick={fetchHospitals}/>
